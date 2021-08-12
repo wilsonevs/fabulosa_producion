@@ -13,7 +13,7 @@ const app = express(); //Inicializar el server
 
 //Configurar el server:
 //configurar puerto:
-app.set('port', process.env.PORT || 32799);
+app.set('port', process.env.PORT || 3000);
 //gestor de plantillas
 app.set('view engine', 'ejs');
 
