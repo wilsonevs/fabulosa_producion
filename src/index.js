@@ -1,8 +1,8 @@
 //indexjs
-const app= require('server.js');
-const connection= require('connectiondb.js');
+const app= require('./config/server');
+const connection= require('./config/connectiondb');
 
-const rutas= require('router.js');
+const rutas= require('./app/routers/router.js');
 rutas(app);
 
 app.listen(app.get('port'), () => {
