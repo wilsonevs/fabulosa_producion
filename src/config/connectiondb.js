@@ -18,7 +18,7 @@ function handleDisconnect(connectionDb) {
 
     connection.getConnection(function (err) {
         if(err){
-            console.log("error heroku to bd: ", error);
+            console.log("error heroku to bd: ", err);
             setTimeout(handleDisconnect, 2000);
         }
     });
