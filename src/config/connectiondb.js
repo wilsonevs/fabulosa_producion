@@ -33,4 +33,4 @@ function handleDisconnect(connection) {
     })
 }
 
-module.exports = {connection}
+handleDisconnect(connection);

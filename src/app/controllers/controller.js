@@ -1,6 +1,6 @@
 // Rutas.
 // Conexion con bd.
-const connection = require("../../config/connectiondb.js");
+const {connection} = require("../../config/connectiondb.js");
 const bcryptjs = require("bcryptjs");
 const random = require("../../public/js/random.js");
 const path = require("path");
