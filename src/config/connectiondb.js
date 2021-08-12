@@ -3,7 +3,7 @@ const mysql = require('mysql');
 //funciona porque el servidor esta conectado con anterioridad a dotenv que esta configurado
 //y ligado a la carpeta ./env/.env
 
-const connection = mysql.createConnection({
+const connectionDb = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     database: process.env.DB_DATABASE,
@@ -12,16 +12,17 @@ const connection = mysql.createConnection({
 
 //probar el modulo:
 
-function handleDisconnect(connection) {
+function handleDisconnect(connectionDb) {
 
-    connection= mysql.createPool(connection);
+    connection= mysql.createPool(connectionDb);
 
     connection.getConnection(function (err) {
         if(err){
             console.log("error heroku to bd: ", error);
             setTimeout(handleDisconnect, 2000);
         }
-    })
+    });
+
     connection.on('Error', function (err) {
         console.log('db error heroku: ', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
@@ -29,7 +30,7 @@ function handleDisconnect(connection) {
         }else{
             throw err;
         }
-    })
+    });
 }
 
-handleDisconnect(connection);
+handleDisconnect(connectionDb);

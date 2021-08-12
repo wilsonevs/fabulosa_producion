@@ -1,6 +1,6 @@
 // Rutas.
 // Conexion con bd.
-const {connection} = require("../../config/connectiondb.js");
+const connectionDb = require("../../config/connectiondb.js");
 const bcryptjs = require("bcryptjs");
 const random = require("../../public/js/random.js");
 const path = require("path");
@@ -37,7 +37,7 @@ const postIndex = async (req, res) => {
     const { nombre, email, telefono, asunto, argumento } = req.body;
   console.log(req.body);
   let login = req.session.isloggedin ? true : false;
-  connection.query(
+  connectionDb.query(
     "INSERT INTO db_asunto SET ?",{
       nombre: nombre,
       email: email,
@@ -94,7 +94,7 @@ const postLogin = async (req, res) => {
   try {
     const { username, passw } = req.body;
     console.log(req.body);
-    connection.query(
+    connectionDb.query(
       "SELECT * FROM db_cliente WHERE username = ? ",[username],
       async (err, result) => {
         if (await result.length === 0 ||!(await bcryptjs.compare(passw, result[0].passw))) {
@@ -144,11 +144,11 @@ const postRegistro = async (req, res) => {
     console.log(req.body);
     let passHaash = await bcryptjs.hash(passw, 8);
   
-    connection.query("SELECT * FROM db_cliente WHERE username = ?",[username],(err, result) => {
+    connectionDb.query("SELECT * FROM db_cliente WHERE username = ?",[username],(err, result) => {
         if (result.length === 0) {
-          connection.query("SELECT * FROM db_cliente WHERE email = ?",[email],(err, result) => {
+          connectionDb.query("SELECT * FROM db_cliente WHERE email = ?",[email],(err, result) => {
               if (result.length === 0) {
-                connection.query("INSERT INTO db_cliente SET ?",{
+                connectionDb.query("INSERT INTO db_cliente SET ?",{
                     username: username,
                     firstname: firstname,
                     lastname: lastname,
@@ -262,7 +262,7 @@ const getTerminosCondiciones = (req, res) => {
 
 const getPerfil = async (req, res) => {
   try {
-   await connection.query("SELECT * FROM db_cliente ", (error, results) => {
+   await connectionDb.query("SELECT * FROM db_cliente ", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -296,7 +296,7 @@ const postUpdatePerfil = async (req,res) => {
     const id= req.params.id;
     const rutaImagen = req.file.filename;
     const{firstname, lastname, ciudad, addre, telefono, email} = req.body;
-    await connection.query("UPDATE db_cliente SET foto_perfil = ?, firstname = ?, lastname = ?, ciudad = ?, addre = ?, telefono = ?, email = ?  WHERE id_cliente = ?", 
+    await connectionDb.query("UPDATE db_cliente SET foto_perfil = ?, firstname = ?, lastname = ?, ciudad = ?, addre = ?, telefono = ?, email = ?  WHERE id_cliente = ?", 
     [rutaImagen, firstname, lastname, ciudad, addre, telefono, email, id], (err, results) =>  {
       if(err){
         res.send(err);
@@ -314,7 +314,7 @@ const postUpdatePerfil = async (req,res) => {
 
 const getSorteos = (req, res) => {
   try {
-    connection.query("SELECT * FROM db_sorteos", (error, results) => {
+    connectionDb.query("SELECT * FROM db_sorteos", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -352,7 +352,7 @@ const getSorteos = (req, res) => {
 
 const postSorteos = (req, res) => {
   try {
-    connection.query("SELECT * FROM db_sorteos", (error, results) => {
+    connectionDb.query("SELECT * FROM db_sorteos", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -373,9 +373,9 @@ const getParticiparSorteo = (req, res) => {
   var id_sorteos= req.params.id; 
   console.log(id_cliente);
   console.log(id_sorteos);
-  connection.query("SELECT * FROM r_cliente_sorteos WHERE sorteos_id = ?",[id_sorteos],(err, result) => {
+  connectionDb.query("SELECT * FROM r_cliente_sorteos WHERE sorteos_id = ?",[id_sorteos],(err, result) => {
     if (result.length === 0) {
-      connection.query( "INSERT INTO r_cliente_sorteos SET ?",{
+      connectionDb.query( "INSERT INTO r_cliente_sorteos SET ?",{
             cliente_id: id_cliente,
             sorteos_id: id_sorteos,
           },
@@ -401,7 +401,7 @@ const getParticiparSorteo = (req, res) => {
   const getparticipantes = (req, res) => {
     try {
         const consulta =("SELECT * FROM r_cliente_sorteos r INNER JOIN db_cliente c ON r.cliente_id = c.id_cliente INNER JOIN db_sorteos s ON r.sorteos_id = s.id_sorteos");
-      connection.query(consulta, (error, results) => {
+        connectionDb.query(consulta, (error, results) => {
         if (error) {
           console.log("Que error tengo: " + error);
         } else {
@@ -433,7 +433,7 @@ const deleteParticipantes = (req,res) => {
   try {
     const id= req.params.id;
     const queryDelete= ("DELETE FROM r_cliente_sorteos WHERE id_cliente_sorteos = ?");
-    connection.query(queryDelete, [id], (err,result) => {
+    connectionDb.query(queryDelete, [id], (err,result) => {
       if(err){
         res.send(err);
       }else{
@@ -449,7 +449,7 @@ const deleteParticipantes = (req,res) => {
 
 const getSorteosAdmin = async(req, res) => {
   try {
-    connection.query("SELECT * FROM db_sorteos", (error, results) => {
+    connectionDb.query("SELECT * FROM db_sorteos", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -486,7 +486,7 @@ const postSorteosAdmin = async (req, res) => {
   console.log("Ruta de imagen:"+ rutaImagen);
   console.log(req.body);
   console.log("Mostrar File: "+req.file);
-  connection.query("INSERT INTO db_sorteos SET ?",
+  connectionDb.query("INSERT INTO db_sorteos SET ?",
     {
       titulo: titulo,
       codigo: "Cod-" + uuidv8(),
@@ -529,7 +529,7 @@ const getDeleteSorteos = (req,res) => {
     // console.log("Ruta: "+rutaImagen);
     // unlink(path.resolve("./src/public/utils/img/uploads/"+rutaImagen));
     const queryDelete= ("DELETE FROM db_sorteos WHERE id_sorteos = ?");
-    connection.query(queryDelete, [id], (err,result) => {
+    connectionDb.query(queryDelete, [id], (err,result) => {
       if(err){
         res.send(err);
       }else{
@@ -548,7 +548,7 @@ const postUpdateSorteo = (req,res) => {
   const{titulo, nombre_producto, lugar, fecha, hora, telefono} = req.body;
   console.log(req.body);
   const queryUpdateSorteo=("UPDATE db_sorteos SET titulo = ?, nombre_producto = ?, lugar = ?, fecha = ?, hora = ?, telefono = ?, imagen = ? WHERE id_sorteos = ?");
-  connection.query( queryUpdateSorteo, [titulo, nombre_producto, lugar, fecha, hora, telefono, rutaImagen, id], (err, results) =>  {
+  connectionDb.query( queryUpdateSorteo, [titulo, nombre_producto, lugar, fecha, hora, telefono, rutaImagen, id], (err, results) =>  {
     if(err){
       res.send(err);
     }else{
@@ -564,7 +564,7 @@ const postUpdateSorteo = (req,res) => {
 
 const getEventos = (req, res) => {
   try {
-    connection.query("SELECT * FROM db_eventos", (error, results) => {
+    connectionDb.query("SELECT * FROM db_eventos", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -596,7 +596,7 @@ const postEventos = async (req, res) => {
   try {
     const {nombre_evento, fecha, hora, patrocinador, actividad, lugar } = req.body;
     console.log(req.body);
-    connection.query(
+    connectionDb.query(
       "INSERT INTO db_eventos SET ?",
       {
         nombre_evento: nombre_evento,
@@ -635,7 +635,7 @@ const postEventos = async (req, res) => {
 const getDeleteEventos = (req,res) => {
   try {
     const id= req.params.id;
-    connection.query("DELETE FROM db_eventos WHERE id_eventos = ?", [id], (err,result) => {
+    connectionDb.query("DELETE FROM db_eventos WHERE id_eventos = ?", [id], (err,result) => {
       if(err){
         res.send(err);
       }else{
@@ -652,7 +652,7 @@ const postUpdateEventos = (req,res) => {
     const id= req.params.id;
     const{nombre_evento, fecha, hora, patrocinador, actividad, lugar } = req.body;
     console.log(req.body);
-    connection.query("UPDATE db_eventos SET nombre_evento = ?, fecha = ?, hora = ?, patrocinador = ?, actividad = ?, lugar = ? WHERE id_eventos = ?", 
+    connectionDb.query("UPDATE db_eventos SET nombre_evento = ?, fecha = ?, hora = ?, patrocinador = ?, actividad = ?, lugar = ? WHERE id_eventos = ?", 
     [nombre_evento, fecha, hora, patrocinador, actividad, lugar, id], (err, results) =>  {
       if(err){
         res.send(err);
@@ -671,7 +671,7 @@ const postUpdateEventos = (req,res) => {
 
 const getResultados = (req, res) => {
   try {
-    connection.query("SELECT * FROM db_ganador", (error, results) => {
+    connectionDb.query("SELECT * FROM db_ganador", (error, results) => {
       if (error) {
         console.log("Que error tengo: " + error);
       } else {
@@ -703,7 +703,7 @@ const postResultados = async (req, res) => {
   try {
     const { firstname, lastname, premio_entregado, patrocinador, codigo, fecha_entrega} = req.body;
     console.log(req.body);
-    connection.query(
+    connectionDb.query(
       "INSERT INTO db_ganador SET ?",
       {
         firstname: firstname,
@@ -742,7 +742,7 @@ const postResultados = async (req, res) => {
 const getDeleteResultados = (req,res) => {
   try {
     const id= req.params.id;
-    connection.query("DELETE FROM db_ganador WHERE id_ganador = ?", [id], (err,result) => {
+    connectionDb.query("DELETE FROM db_ganador WHERE id_ganador = ?", [id], (err,result) => {
       if(err){
         res.send(err);
       }else{
@@ -759,7 +759,7 @@ const postUpdateResultados = (req,res) => {
     const id= req.params.id;
     const{firstname, lastname, premio_entregado, patrocinador, codigo, fecha_entrega } = req.body;
     console.log(req.body);
-    connection.query("UPDATE db_ganador SET firstname = ?, lastname = ?, premio_entregado = ?, patrocinador = ?, codigo = ?, fecha_entrega = ? WHERE id_ganador = ?", 
+    connectionDb.query("UPDATE db_ganador SET firstname = ?, lastname = ?, premio_entregado = ?, patrocinador = ?, codigo = ?, fecha_entrega = ? WHERE id_ganador = ?", 
     [firstname, lastname, premio_entregado, patrocinador, codigo, fecha_entrega, id], (err, results) =>  {
       if(err){
         res.send(err);
