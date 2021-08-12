@@ -1,8 +1,8 @@
 // Rutas.
 // Conexion con bd.
-const connection = require("../../config/connectiondb.js");
+const connection = require("onnectiondb.js");
 const bcryptjs = require("bcryptjs");
-const random = require("../../public/js/random.js");
+const random = require("random.js");
 const path = require("path");
 const {v4} =  require("uuid")
 const {unlink} = require("fs-extra");
