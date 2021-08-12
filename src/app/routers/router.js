@@ -1,4 +1,4 @@
-const connection = require("../../config/connectiondb.js");
+const connectionDb = require("../../config/connectiondb.js");
 
 const {
   upload,
