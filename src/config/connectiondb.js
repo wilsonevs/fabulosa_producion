@@ -1,14 +1,13 @@
 const mysql = require('mysql');
-const { __esModule } = require('uuid/dist/v1');
 
 //funciona porque el servidor esta conectado con anterioridad a dotenv que esta configurado
 //y ligado a la carpeta ./env/.env
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
-    pass: process.env.DB_PASSWORD,
     user: process.env.DB_USER,
-    database: process.env.DB_DATABASE
+    database: process.env.DB_DATABASE,
+    pass: process.env.DB_PASSWORD,
 });
 
 //probar el modulo:
