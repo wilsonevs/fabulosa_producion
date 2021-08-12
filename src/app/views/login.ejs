@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %> 
+<%- include('../includes/headers.ejs') %> 
+
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+    <div class="bradcumbContent">
+        <!-- <p>See what’s new</p> -->
+        <h2>Ingresar</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Login Area Start ##### -->
+<section class="login-area section-padding-100" id="registro">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="login-content">
+                    <h3>Usuario</h3>
+                    <!-- Login Form -->
+                    <div class="login-form">
+                        <form action="login" method="POST">
+                            <div class="form-group">
+                                <label for="userRegistro">Usuario</label>
+                                <input type="text" class="form-control" name="username" id="userRegistro" aria-describedby="emailHelp" placeholder="Ingresar Usuario o Correo Eletronico" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passw">Contraseña</label>
+                                <input type="password" class="form-control" name="passw" id="passw" placeholder="Ingresar Contraseña" required>
+                            </div>
+                            <button type="submit" class="btn oneMusic-btn mt-30">Ingresar</button>
+                        </form>
+                        <p>¿No tienes cuenta?<a href="/registro"> Registrate</a></p>
+                        <p>Al Ingresar acepta los <a href="/terminos_condiciones">términos y condiciones de uso.</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Login Area End ##### -->
+
+<%- include('../includes/footer.ejs') %> 
+
+<!-- Iniciar alerta -->
+
+<% if(typeof alert !="undefined") { %>
+    <script>
+        Swal.fire({
+            title: '<%= alertTitle  %>',
+            text: '<%= alertMessage %>',
+            icon: '<%= alertIcon %>',
+            showConfirmButton:'<%= showConfirmButton %>',
+            timer:  2500
+        }).then(()=>{
+            window.location= '/<%= ruta %>'
+        })
+    </script>
+<% } %>
+    
+<!-- Fin alerta -->

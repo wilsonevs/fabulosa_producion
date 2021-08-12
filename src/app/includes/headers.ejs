@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <header >
+        <div class="bs-example">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+                <a class="navbar-brand ml-50" href="/"><img src="src/utils/icons/logo_01.png" alt="" width="95" height="95"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav m-auto">
+                        <a class="navbar-brand mb-0 h1 text-white" href="/">Inicio</a>
+                        <a class="navbar-brand mb-0 h1 text-white" href="<%=login === true ? rol ==='administrador' ? 'sorteos_admin' : '#nosotros':'#nosotros'%>"><%=login===true ? rol==='administrador' ? 'Sorteos Administrador': 'Nosotros' : 'Nosotros' %></a>
+                        <a class="navbar-brand mb-0 h1 text-white" href="<%=login === true ? rol ==='administrador' ? 'eventos' : '#servicio':'#servicio'%>"><%=login===true ? rol==='administrador' ? 'Eventos' : 'Servicio': 'Servicio' %></a>
+                        <a class="navbar-brand mb-0 h1 text-white" href="<%=login === true ? rol ==='administrador' ? 'participantes' : '#galeria':'#galeria'%>"><%=login===true ? rol==='administrador' ? 'Participantes' : 'Galería': 'Galería' %></a>
+                        <a class="navbar-brand mb-0 h1 text-white" href="<%=login === true ? rol ==='administrador' ? 'resultados' : '#contactenos':'#contactenos'%>"><%=login===true ? rol==='administrador' ? 'Resultados' : 'Contáctenos': 'Contáctenos' %></a>
+                        <a class="navbar-brand mb-0 h1 text-white" href="<%=login === true ? rol ==='administrador' ? null : 'sorteos':'sorteos'%>"><%=login=== true ? rol==='administrador' ? null : 'Sorteos' : 'Sorteos' %></a>
+                    </div>
+                    <div class="navbar-nav mr-50">
+                        <a class="navbar-brand m-0 mr-3" href="<%= login===true ? 'perfil' : 'login' %>"><img src="src/utils/img/perfil/<%= login !==true ? 'perfil.jpg' : foto_perfil !== "" ? foto_perfil :'perfil.jpg' %>"style="width: 75px; height: 75px; " class="rounded-circle borde_blanco" /></a>
+                        <a class="navbar-brand mt-4 h1 text-white" href="<%= login===true ? 'perfil' : 'login' %>"><%= login===true ? username : 'Ingresar' %></a>
+                        <a class="navbar-brand mt-4 h1 text-white" href="<%= login===true ? 'logout' : 'registro' %>"> <%= login===true ? 'Cerrar Sesión' : 'Registro' %></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+  <script type="text/javascript">
+    var nav = document.querySelector('nav');
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 100) {
+        nav.classList.add('bg-dark', 'shadow');
+      } else {
+        nav.classList.remove('bg-dark', 'shadow');
+      }
+    });
+  </script>
+
+<!-- Smartsupp Live Chat script -->
+  <script class="chat" type="text/javascript">
+   var _smartsupp = _smartsupp || {};
+   _smartsupp.key = '424e12dc1b5650a999e01b8bb03e6d3997e03356';
+   window.smartsupp||(function(d) {
+       var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+       s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+       c.type='text/javascript';c.charset='utf-8';
+       c.async=true;
+       c.src='https://www.smartsuppchat.com/loader.js?';
+       s.parentNode.insertBefore(c,s);
+   })(document);
+  </script> 

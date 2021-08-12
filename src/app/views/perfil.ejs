@@ -1,0 +1,183 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/headers.ejs') %>
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img bg-overlay"
+            style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+            <div class="bradcumbContent">
+                <!-- <p>See what’s new</p> -->
+                <h2>Perfil</h2>
+            </div>
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+        <% for(let i=0; i< datos.length; i++) { %> 
+            <% if( datos[i].username === username) { %> 
+    <!-- Diseño de perfil -->
+    <div class="container w-50 bg-light my-5 rounded-3 shadow">
+        <div class="row align-items-stretch">
+                <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-start">
+                    <img type="file" class="bg_fondo rounded-circle mt-5" src="src/utils/img/perfil/<%= datos[i].foto_perfil !== "" ? datos[i].foto_perfil : 'perfil.jpg' %>">
+                    <h1 class="mt-3" style="text-align:center; color: #fff;"><%= datos[i].username %></h1>
+                </div>
+                <div class="col bg-white p-5 rounded-end">
+                    <!-- inicio -->
+                    <div class="row mt-3">
+                        <div class="col-12 mb-1">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Nombre:</strong> <%= datos[i].firstname %>
+                            </label>
+                        </div>
+                        <div class="col-12 mb-1">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Apellido:</strong> <%= datos[i].lastname %>
+                            </label>
+                        </div>
+                        <div class="col-12 mb-1">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Ciudad: </strong> <%= datos[i].ciudad %>
+                            </label>
+                        </div>
+                        <div class="col-12 mb-1">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Dirreción:</strong> <%= datos[i].addre %>
+                            </label>
+                        </div>
+                        <div class="col-12 mb-1">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Teléfono:</strong> <%= datos[i].telefono %>
+                            </label>
+                        </div>
+                        <div class="col-12 mb-1 mb-5">
+                            <label class="form-label" style="font-size: 17px; color: #696969; ">
+                                <strong>Correo eletrónico:</strong> <%= datos[i].email %>
+                            </label>
+                        </div>
+                    
+                        <div class="d-grid">
+                            <button type="button" class="mr-1 btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal<%= datos[i].id_cliente%>"data-bs-whatever="@mdo"><i class="fas fa-marker"></i></button>
+                        </div>
+                        <!-- Inicio Redes Sociales -->
+            <div class="container w-100 mt-3">
+                <!-- <div class="row text-center">
+                    <div class="col-12 my-1">Redes Sociales</div>
+                </div> -->
+
+                <!-- <div class="row"> -->
+                    <!-- 1 -->
+                    <!-- <div class="col">
+                        <button class="btn btn-outline-dark w-100 my-1">
+                            <div class="row align-items-center">
+                                <div class="col-4 d-none d-md-block">
+                                    <a href="https://www.facebook.com/SYZColombia/?ref=br_tf&epa=SEARCH_BOX" target="_blank"><img src="src/utils/icons/facebook.png" width="45" alt=""></a>
+                                </div>
+                                <div class="col-12 col-md-8 text-center">
+                                    <a href="https://www.facebook.com/SYZColombia/?ref=br_tf&epa=SEARCH_BOX" target="_blank">Facebook</a>
+                                </div>
+                            </div>
+                        </button>
+                    </div> -->
+                    <!-- 2 -->
+                    <!-- <div class="col">
+                        <button class="btn btn-outline-dark w-100 my-1">
+                            <div class="row align-items-center">
+                                <div class="col-4 d-none d-md-block">
+                                    <a href="https://www.facebook.com/SYZColombia/?ref=br_tf&epa=SEARCH_BOX" target="_blank"><img src="src/utils/icons/Instagram.png" width="45" alt=""></a>
+                                </div>
+                                <div class="col-12 col-md-8 text-center">
+                                    <a href="https://www.facebook.com/SYZColombia/?ref=br_tf&epa=SEARCH_BOX" target="_blank">Instagram</a>
+                                </div>
+                            </div>
+                        </button>
+                    </div> -->
+                    <!-- 3 -->
+                    <!-- <div class="col">
+                        <button class="btn btn-outline-dark w-100 my-1">
+                            <div class="row align-items-center">
+                                <div class="col-4 d-none d-md-block">
+                                    <a href="https://www.linkedin.com/company/syz-colombia" target="_blank"><img src="src/utils/icons/linkedin.png" width="45" alt=""></a>
+                                </div>
+                                <div class="col-12 col-md-8 text-center">
+                                    <a href="https://www.linkedin.com/company/syz-colombia" target="_blank">Linkedin</a>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div> -->
+                <!-- FIN -->
+            </div>
+            <!-- Fin Redes Sociales -->
+                    </div>
+                </div>
+                    <!-- final -->
+            <!-- modal -->
+            <div class="modal fade" id="exampleModal<%= datos[i].id_cliente %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Actualización</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="updateperfil/<%= datos[i].id_cliente%>" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Foto:</label>
+                                <input type="file" name="foto_perfil" class="form-control" accept=".jpg, .jpeg, .png .gif" value="<%= datos[i].foto_perfil%>" required>
+                              </div>
+                            <div class="mb-3">
+                              <label for="recipient-name" class="col-form-label">Nombre:</label>
+                              <input type="text" name="firstname" class="form-control" id="recipient-name" value="<%= datos[i].firstname%>">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Apellido:</label>
+                                <input type="text" name="lastname" class="form-control" id="recipient-name"  value="<%= datos[i].lastname%>">
+                              </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Ciudad:</label>
+                                <input type="text" name="ciudad" class="form-control" id="recipient-name"  value="<%= datos[i].ciudad%>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Dirreción:</label>
+                                <input type="text" name="addre" class="form-control" id="recipient-name" value="<%= datos[i].addre%>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Teléfono:</label>
+                                <input type="text" name="telefono" class="form-control" id="recipient-name" value="<%= datos[i].telefono%>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Correo eletrónico:</label>
+                                <input type="text" name="email" class="form-control" id="recipient-name" value="<%= datos[i].email%>">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <input type="submit" class="btn btn-primary" value="Actualizar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <% } %> 
+<% } %> 
+
+<%- include('../includes/footer.ejs')  %>
+
+
+<!-- Iniciar alerta -->
+
+<% if(typeof alert !="undefined") { %>
+    <script>
+        Swal.fire({
+            title: '<%= alertTitle  %>',
+            text: '<%= alertMessage %>',
+            icon: '<%= alertIcon %>',
+            showConfirmButton:'<%= showConfirmButton %>',
+            timer:  '<%= timer %>',
+        }).then(()=>{
+            window.location= '/<%= ruta %>'
+        })
+    </script>
+<% } %>
+    
+<!-- Fin alerta -->

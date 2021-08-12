@@ -1,0 +1,163 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/headers.ejs') %>
+
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+            <div class="bradcumbContent">
+                <!-- <p>See what’s new</p> -->
+                <h2>RESULTADOS</h2>
+            </div>
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+        <section class="login-area section-padding-100" id="registro"></section>
+            <div class="container">
+                <div class="card">
+                    <form action="resultados" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- 1 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">Nombres:</label>
+                                    <input class="form-control text-uppercase" type="text" name="firstname" placeholder="Ingresa el nombre" min="1" autofocus value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Apellidos:</label>
+                                    <input class="form-control text-uppercase" type="text" name="lastname" placeholder="Ingresa el apellidos" min="1" required>
+                                </div>
+
+                                <!-- 2 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">Premio Entregado:</label>
+                                    <input class="form-control text-uppercase" type="text" name="premio_entregado" placeholder="Ingresa el premio entregado" value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Patrocinador:</label>
+                                    <input class="form-control text-uppercase" type="text" name="patrocinador" placeholder="Ingresa el patrocinador" min="1" required>
+                                </div>
+                                <!-- 3 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">Código:</label>
+                                    <input class="form-control text-uppercase" type="text" name="codigo" placeholder="Ingresa el codigo" value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Fecha Entrega:</label>
+                                    <input class="form-control text-uppercase" type="date" name="fecha_entrega" placeholder="Ingresa la fecha de entrega" min="1" required>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center mt-3">
+                                <input type="submit" class="btn btn-dark btn-block" value="Ingresar">
+                            </div>
+                        </div>
+                        <!-- <div style="height: 15px;"></div> -->
+                    </form>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="card-footer">
+                                        <table id="verTableUsuario" class="table table-striped table-hover table-bordered" style="width:100%">
+                                            <thead class="text-center thead-dark">
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>Nombres</td>
+                                                    <td>Apellidos</td>
+                                                    <td>Premio Entregado</td>
+                                                    <td>Nombre Patrocinador</td>
+                                                    <td>Código</td>
+                                                    <td>Fecha Entrega</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (var index=0; index < datos.length; index++) { %>
+                                                    <tr>
+                                                        <td><%= datos[index].id_ganador %></td>
+                                                        <td><%= datos[index].firstname %></td>
+                                                        <td><%= datos[index].lastname %></td>
+                                                        <td><%= datos[index].premio_entregado %></td>
+                                                        <td><%= datos[index].patrocinador %></td>
+                                                        <td><%= datos[index].codigo %></td>
+                                                        <td><%= datos[index].fecha_entrega %></td>
+                                                        <td>
+                                                            <div class="col">
+                                                                <button type="button" class="mr-1 btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<%= datos[index].id_ganador %>" data-bs-whatever="@mdo"><i class="fas fa-marker"></i></button>
+                                                                    <div style="height: 5px;"></div>
+                                                                <a class="mr-1 btn btn-danger" href="/deleteresultados/<%= datos[index].id_ganador %>"> <i class="fas fa-trash-alt"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <div class="modal fade" id="exampleModal<%= datos[index].id_ganador %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLabel">Actualización</h5>
+                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              <form method="POST" action="/updateresultados/<%= datos[index].id_ganador%>">
+                                                                <div class="mb-3">
+                                                                  <label for="recipient-name" class="col-form-label">Nombres:</label>
+                                                                  <input type="text" name="firstname" class="form-control" id="recipient-name" value="<%= datos[index].firstname%>">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Apellidos:</label>
+                                                                    <input type="text" name="lastname" class="form-control" id="recipient-name"  value="<%= datos[index].lastname%>">
+                                                                  </div>
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Premio Entregado:</label>
+                                                                    <input type="text" name="premio_entregado" class="form-control" id="recipient-name"  value="<%= datos[index].premio_entregado%>">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Nombre Patrocinador:</label>
+                                                                    <input type="text" name="patrocinador" class="form-control" id="recipient-name" value="<%= datos[index].patrocinador%>">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Código:</label>
+                                                                    <input type="text" name="codigo" class="form-control" id="recipient-name" value="<%= datos[index].codigo%>">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Fecha Entrega:</label>
+                                                                    <input type="date" name="fecha_entrega" class="form-control" id="recipient-name" value="<%= datos[index].fecha_entrega%>">
+                                                                  </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <input type="submit" class="btn btn-secondary" value="Actualizar">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  <% } %>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </section>
+
+    
+ <!-- ##### Breadcumb Area End ##### -->
+ <%- include('../includes/footer.ejs') %>
+
+    <!-- Iniciar alerta -->
+
+    <% if(typeof alert !="undefined" ) { %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle  %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: '<%= showConfirmButton %>',
+                timer: 2500
+            }).then(() => {
+                window.location = '/<%= ruta %>'
+            })
+        </script>
+        <% } %>
+
+    <!-- Fin alerta -->

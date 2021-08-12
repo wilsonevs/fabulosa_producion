@@ -1,0 +1,68 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/headers.ejs') %>
+<link rel="stylesheet" href="src/style/tarjet.css">
+
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+            <div class="bradcumbContent">
+                <!-- <p>See what’s new</p> -->
+                <h2>SORTEOS</h2>
+            </div>
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+
+
+        <!-- ##### Login Area Start ##### -->
+    <section class="login-area section-padding-100" id="registro"></section>
+        <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-4">
+            <% for (var index=0; index < datos.length; index++) { %>
+                <form action="participarsorteos/<%= datos[index].id_sorteos%>" method="get">
+                    <div class="col">
+                        <div class="container-tarje">
+                            <div class="card">
+                                <div class="card-head">
+                                    <img src="src/utils/icons/logo_01.png" alt="logo" class="card-logo">
+                                    <img style="border-radius: 12px" src="src/utils/img/uploads/<%= datos[index].imagen%>"alt="Shoe" class="product-img img_card" >
+                                    <span class="back-text">FABULOSA</span>
+                                </div>
+                                <div class="card-body">
+                                    <span class="product-title">
+                                        <b><%= datos[index].titulo%></b>
+                                        <span class="badge"><i class="fa fa-gift"></i></span>
+                                    </span>
+                                    <span class="product-descripcion mb-2">
+                                        <h4>Nombre: <%= datos[index].nombre_producto%></h4>
+                                        <h4>Dirección: <%= datos[index].lugar%></h4>
+                                        <h4>Fecha: <%= datos[index].fecha%></h4>
+                                        <h4>Hora: <%= datos[index].hora%></h4>
+                                        <h4>Contacto: <%= datos[index].telefono%></h4>
+                                        <h4>Codigo: <%= datos[index].codigo%></h4>
+                                    </span>
+                                    <span class="product-validator">
+                                        <input type="submit" class="btn btn-block text-white" value="Aplicar">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+        </div>
+    </section>
+    <%- include('../includes/footer.ejs') %>
+        <!-- Iniciar alerta -->
+        <% if(typeof alert !="undefined" ) { %>
+            <script>
+                Swal.fire({
+                    title: '<%= alertTitle  %>',
+                    text: '<%= alertMessage %>',
+                    icon: '<%= alertIcon %>',
+                    showConfirmButton: '<%= showConfirmButton %>',
+                    timer: 2500
+                }).then(() => {
+                    window.location = '/<%= ruta %>'
+                })
+            </script>
+            <% } %>
+                <!-- Fin alerta -->

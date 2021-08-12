@@ -1,0 +1,143 @@
+.container-tarje {
+    width: 320px;
+    height: 550px;
+    margin: 30px auto;
+  }
+  
+  .card {
+    border-radius: 25px;
+    box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-head {
+    position: relative;
+    height: 320px;
+    background: #fa782e;
+    /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #fa782e 8%, #c82930 83%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #A9A9A9 8%, #323232 83%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fa782e', endColorstr='#c82930', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+    border-radius: 25px 25px 0 0;
+  }
+  
+  .card-logo {
+    width: 55px;
+    margin: 20px;
+  }
+  
+  .product-img {
+    position: absolute;
+    left: 0;
+    margin-top: -40px;
+    margin-left: 90px;
+  }
+  
+  .product-detail {
+    padding: 0 20px;
+    font-size: 11px;
+    color: #fff;
+  }
+  
+  .product-detail h2 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  .back-text {
+    display: inline-block;
+    font-size: 45px;
+    font-weight: 900;
+    margin-left: 35px;
+    margin-top: -12px;
+    opacity: 0.3;
+  }
+  
+  .card-body {
+    height: 255px;
+    background: #fff;
+    border-radius: 0 0 25px 25px;
+  }
+  
+  .product-title {
+    padding: 20px 20px 5px 20px;
+    display: block;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .product-title b {
+    font-weight: 900;
+    letter-spacing: 0px;
+  }
+  
+  .badge {
+    position: relative;
+    font-size: 20px;
+    font-weight: 300;
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 4px;
+    top: -2px;
+    margin-left: 5px;
+    box-shadow: -10px 20px 60px -10px rgb(232,92,47);
+    background: linear-gradient(135deg, #fa782e 8%, #c82930 83%);
+  }
+  
+  .product-caption {
+    display: block;
+    padding: 0 20px;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+
+  
+  .product-descripcion h4 {
+    font-size: 11px;
+    padding: 0 21px;
+    margin-top: 1px;
+    text-transform: uppercase;
+  }
+  
+
+  .product-descripcion:before,
+  .product-descripcion:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  
+  
+  .product-validator {
+    position: relative;
+    top: -15px;
+    left: 175px;
+    padding: 7px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 21px;
+    font-weight: 200;
+    color: #fff;
+    border-radius: 7px;
+    margin-top: -13px;
+    margin-left: -5px;
+    box-shadow: -10px 20px 60px -10px rgb(232,92,47);
+    background: linear-gradient(135deg, #fa782e 8%, #c82930 83%);
+  }
+  
+  .product-validator b {  
+    margin-left: 5px;
+  }
+  
+  

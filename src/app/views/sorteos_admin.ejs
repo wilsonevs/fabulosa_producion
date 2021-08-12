@@ -1,0 +1,183 @@
+<%- include('../includes/head.ejs') %>
+    <%- include('../includes/headers.ejs') %>
+
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+            <div class="bradcumbContent">
+                <!-- <p>See what’s new</p> -->
+                <h2>SORTEOS ADMINISTRAR</h2>
+            </div>
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+        <section class="login-area section-padding-100" id="registro"></section>
+            <div class="container">
+                <div class="card">
+                    <form action="sorteos_admin" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- 1 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">Título:</label>
+                                    <input class="form-control text-uppercase" type="text" name="titulo" id="titulo"
+                                        placeholder="Ingresa el Título" min="6" max="" autofocus value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Artículo:</label>
+                                    <input class="form-control text-uppercase" type="text" name="nombre_producto"
+                                        id="nombre_producto" placeholder="Ingresa el Artículo" min="2" max="25" value=""required>
+                                </div>
+
+                                <!-- 2 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">lugar:</label>
+                                    <input class="form-control text-uppercase" type="text" name="lugar" id="lugar"
+                                        placeholder="Ingresa el Lugar" min="2" max="25" value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Fecha:</label>
+                                    <input class="form-control text-uppercase" type="date" name="fecha" id="fecha"
+                                        placeholder="Ingresa el Fecha" min="6" min="2019-01-01" max="2030-01-01" value="" required>
+                                </div>
+
+                                <!-- 3 -->
+                                <div class="col-md-6">
+                                    <label for="nombre">Hora:</label>
+                                    <input class="form-control text-uppercase" type="time" name="hora" id="hora"
+                                        placeholder="Ingresa la Hora" value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nombre">Teléfono:</label>
+                                    <input class="form-control text-uppercase" type="text" name="telefono" id="telefono"
+                                        placeholder="Ingresa el teléfono" value="" required>
+                                </div>
+                                <!-- 5 -->
+                                <div class="col-md-12">
+                                    <label for="nombre">Imagen</label>
+                                    <p><input type="file" name="imagen" id="imagen"></p>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center mt-3">
+                                <input type="submit" class="btn btn-dark btn-block" value="Ingresar">
+                            </div>
+                        </div>
+                        <!-- <div style="height: 15px;"></div> -->
+                    </form>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="card-footer">
+                                        <table id="verTableUsuario" class="table table-striped table-hover table-bordered" style="width:100%">
+                                            <thead class="text-center thead-dark">
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>Código</td>
+                                                    <td>Título</td>
+                                                    <td>Artículo</td>
+                                                    <td>lugar</td>
+                                                    <td>Fecha</td>
+                                                    <td>Hora</td>
+                                                    <td>Teléfono</td>
+                                                    <td>Imagen</td>
+                                                    <td>Opción</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (var index=0; index < datos.length; index++) { %>
+                                                    <tr>
+                                                        <td style="text-align: center;"><%= datos[index].id_sorteos%></td>
+                                                        <td style="text-align: center;"><%= datos[index].codigo%></td>
+                                                        <td style="text-align: center;"><%= datos[index].titulo%></td>
+                                                        <td style="text-align: center;"><%= datos[index].nombre_producto%></td>
+                                                        <td style="text-align: center;"><%= datos[index].lugar%></td>
+                                                        <td style="text-align: center;"><%= datos[index].fecha%></td>
+                                                        <td style="text-align: center;"><%= datos[index].hora%></td>
+                                                        <td style="text-align: center;"><%= datos[index].telefono%></td>
+                                                        <td style="text-align: center;"><%= datos[index].imagen%></td>
+                                                        <td>
+                                                            <div class="col">
+                                                                <button type="button" class="mr-1 btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<%= datos[index].id_sorteos %>" data-bs-whatever="@mdo"><i class="fas fa-marker"></i></button>
+                                                                    <div style="height: 5px;"></div>
+                                                                <a class="mr-1 btn btn-danger"  href="/deleteSorteos/<%= datos[index].id_sorteos %>"> <i class="fas fa-trash-alt"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <div class="modal fade" id="exampleModal<%= datos[index].id_sorteos %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLabel">Actualización</h5>
+                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              <form method="POST" action="/updatesorteo/<%= datos[index].id_sorteos%>" enctype="multipart/form-data">
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Imagen:</label>
+                                                                    <input type="file" name="imagen" class="form-control" id="imagen" value="<%= datos[index].imagen%>">
+                                                                   
+                                                                  </div>
+                                                                <div class="mb-3">
+                                                                  <label for="recipient-name" class="col-form-label">Título:</label>
+                                                                  <input type="text" name="titulo" class="form-control" id="recipient-name" value="<%= datos[index].titulo%>">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Artículo:</label>
+                                                                    <input type="text" name="nombre_producto" class="form-control" id="recipient-name"  value="<%= datos[index].nombre_producto%>">
+                                                                  </div>
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">lugar:</label>
+                                                                    <input type="text" name="lugar" class="form-control" id="recipient-name"  value="<%= datos[index].lugar%>">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Fecha:</label>
+                                                                    <input type="date" name="fecha" class="form-control" id="recipient-name" value="<%= datos[index].fecha%>" required>
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Hora:</label>
+                                                                    <input type="time" name="hora" class="form-control" id="recipient-name" value="<%= datos[index].hora%>">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">Teléfono:</label>
+                                                                    <input type="text" name="telefono" class="form-control" id="recipient-name" value="<%= datos[index].telefono%>">
+                                                                  </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <input type="submit" class="btn btn-secondary" value="Actualizar">
+                                                                </div>
+                                                            </form>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    <div style="height: 50"></div>
+
+    <!-- ##### Breadcumb Area End ##### -->
+    <%- include('../includes/footer.ejs') %>
+        <!-- Iniciar alerta -->
+        <% if(typeof alert !="undefined" ) { %>
+            <script>
+                Swal.fire({
+                    title: '<%= alertTitle  %>',
+                    text: '<%= alertMessage %>',
+                    icon: '<%= alertIcon %>',
+                    showConfirmButton: '<%= showConfirmButton %>',
+                    timer: 2500
+                }).then(() => {
+                    window.location = '/<%= ruta %>'
+                })
+            </script>
+            <% } %>
+                <!-- Fin alerta -->

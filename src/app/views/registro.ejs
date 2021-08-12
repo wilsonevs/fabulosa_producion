@@ -1,0 +1,88 @@
+<%- include('../includes/head.ejs') %> 
+<%- include('../includes/headers.ejs') %> 
+
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(src/utils/img/fondos/bg_01.jpg);">
+    <div class="bradcumbContent">
+        <!-- <p>See what’s new</p> -->
+        <h2>Registro</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+
+<!-- ##### Login Area Start ##### -->
+<section class="login-area section-padding-100" id="registro">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="login-content">
+                    <h3>Usuario</h3>
+                    <!-- Login Form -->
+                    <div class="login-form">
+                        <form action="registro" method="POST">
+                            <div class="form-group">
+                                <label for="userRegistro" id="userRegistro">Usuario</label>
+                                <input type="text" class="form-control" name="username" id="userRegistro" aria-describedby="emailHelp" placeholder="Ingresar un Usuario" min="2" max="100"  autofocus required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userRegistro" id="userRegistro">Nombre</label>
+                                <input type="text" class="form-control" name="firstname" id="userRegistro" aria-describedby="emailHelp" placeholder="Ingresar Nombre" min="2" max="100"  autofocus required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userRegistro" id="lastNameRegistro">Apellido</label>
+                                <input type="text" class="form-control" name="lastname" id="lastNameRegistro" aria-describedby="emailHelp" placeholder="Ingresar Apellido" min="2" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressRegistro" id="directionRegistro">Ciudad</label>
+                                <input type="text" class="form-control" name="ciudad" id="addressRegistro" aria-describedby="emailHelp" placeholder="Ingresar Ciudad" min="2" max="75" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressRegistro" id="directionRegistro">Dirección</label>
+                                <input type="text" class="form-control" name="addre" id="addressRegistro" aria-describedby="emailHelp" placeholder="Ingresar Dirección" min="2" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneRegistro" id="telephoneRegistro">Teléfono</label>
+                                <input type="text" class="form-control" name="telefono" id="phoneRegistro" aria-describedby="emailHelp" placeholder="Ingresar Teléfono" min="2" max="20" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailRegistro" id="emailRegistro">Correo Electrónico</label>
+                                <input type="email" class="form-control" name="email" id="emailRegistro" aria-describedby="emailHelp" placeholder="Ingresar Correo Electrónico" min="2" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passRegistro" id="passRegistro">Contraseña</label>
+                                <input type="password" class="form-control" name="passw" id="passRegistro" placeholder="Ingresar Contraseña" min="2" max="255" required>
+                            </div>
+                            <button type="submit" class="btn oneMusic-btn mt-30" id="buttonRegistro" onclick="registro()">Registrarme</button>
+                        </form>
+                        <br>
+                        <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión.</a></p>
+                        <p>Al registrarse acepto los <a href="/terminos_condiciones">términos y condiciones de uso.</a></p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Login Area End ##### -->
+
+<%- include('../includes/footer.ejs') %> 
+
+<!-- Iniciar alerta -->
+
+<% if(typeof alert !="undefined") { %>
+    <script>
+        Swal.fire({
+            title: '<%= alertTitle  %>',
+            text: '<%= alertMessage %>',
+            icon: '<%= alertIcon %>',
+            showConfirmButton:'<%= showConfirmButton %>',
+            timer:  '<%= timer %>',
+        }).then(()=>{
+            window.location= '/<%= ruta %>'
+        })
+    </script>
+<% } %>
+    
+<!-- Fin alerta -->
