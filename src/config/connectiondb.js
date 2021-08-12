@@ -16,18 +16,18 @@ function handleDisconnect(connection) {
 
     connection= mysql.createPool(connection);
 
-    connection.getConnection(function (error) {
-        if(error){
-            console.log("Error heroku to bd: ", error);
+    connection.getConnection(function (err) {
+        if(err){
+            console.log("error heroku to bd: ", error);
             setTimeout(handleDisconnect, 2000);
         }
     })
-    connection.on('Error', function (error) {
-        console.log('db error heroku: ', error);
-        if (error.code === 'PROTOCOL_CONNECTION_LOST') {
+    connection.on('Error', function (err) {
+        console.log('db error heroku: ', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             handleDisconnect();            
         }else{
-            throw error;
+            throw err;
         }
     })
 }
