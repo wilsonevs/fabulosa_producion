@@ -31,6 +31,8 @@ function handleDisconnect(connectionDb) {
             throw err;
         }
     });
+    console.log("WILSON ERROR"+connectionDb);
 }
+
 
 handleDisconnect(connectionDb);
