@@ -1,6 +1,6 @@
 //indexjs
 const app= require('./config/server');
-const connectionDb= require('./config/connectiondb');
+const connection= require('./config/connectiondb');
 
 const rutas= require('./app/routers/router.js');
 rutas(app);

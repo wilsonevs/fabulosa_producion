@@ -19,7 +19,7 @@ const uploadPerfil = multer({
   dest: path.join(__dirname, '../public/utils/img/perfil'),
   limits: { fieldSize: 2048000},
   fileFilter: (req, file , cb) => {
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|png|gif|svg|webp/;
     const isMimeType = filetypes.test(file.mimetype);
     const isExtName = filetypes.test(path.extname(file.originalname));
 

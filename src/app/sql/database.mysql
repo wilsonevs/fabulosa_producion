@@ -3,85 +3,85 @@ CREATE DATABASE emisora_web;
 USE emisora_web;
 
 
-  CREATE TABLE IF NOT EXISTS db_asunto (
-    id_asunto INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(75) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
-    asunto VARCHAR(20) NOT NULL,
-    argumento VARCHAR(500) NOT NULL
-    )ENGINE = InnoDB;
-
-  -- -----------------------------------------------------
-  -- Table emisora_web.db_cliente
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS db_cliente (
-    id_cliente INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    foto_perfil VARCHAR(100) NOT NULL,
-    username VARCHAR(100) NOT NULL,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    ciudad VARCHAR(75) NOT NULL,
-    addre VARCHAR(75) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    passw VARCHAR(255) NOT NULL,
-    rol VARCHAR(255) NOT NULL,
-    data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
-    )ENGINE = InnoDB;
-
-  -- -----------------------------------------------------
-  -- Table emisora_web.db_eventos
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS db_eventos (
-    id_eventos INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nombre_evento VARCHAR(75) NOT NULL,
-    fecha VARCHAR(10) NOT NULL,
-    hora VARCHAR(10) NOT NULL,
-    patrocinador VARCHAR(75) NOT NULL,
-    actividad VARCHAR(75) NOT NULL,
-    lugar VARCHAR(75) NOT NULL,
-    data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
-    )ENGINE = InnoDB;
-
-  -- -----------------------------------------------------
-  -- Table emisora_web.db_ganador
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS db_ganador (
-    id_ganador INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    premio_entregado VARCHAR(100) NOT NULL,
-    patrocinador VARCHAR(100) NOT NULL,
-    codigo VARCHAR(25) NOT NULL,
-    fecha_entrega VARCHAR(20) NOT NULL,
-    data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
-    )ENGINE = InnoDB;
-
-  -- -----------------------------------------------------
-  -- Table emisora_web.db_sorteos
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS db_sorteos (
-    id_sorteos INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(100) NOT NULL,
-    codigo VARCHAR(25) NOT NULL,
-    nombre_producto VARCHAR(100) NOT NULL,
-    lugar VARCHAR(100) NOT NULL,
-    fecha VARCHAR(10) NOT NULL,
-    hora VARCHAR(10) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
-    imagen VARCHAR(100) NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
-    )ENGINE = InnoDB;
-
-  -- -----------------------------------------------------
-  -- Table emisora_web.fk_cliente_sorteos_ganador
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS r_cliente_sorteos (
-    id_cliente_sorteos INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    cliente_id  INT(11) NOT NULL,
-    sorteos_id  INT(11) NOT NULL,
-    data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    FOREIGN KEY (cliente_id) REFERENCES db_cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (sorteos_id) REFERENCES db_sorteos (id_sorteos) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS emisora_web.db_asunto (
+  id_asunto INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(75) NOT NULL,
+  telefono VARCHAR(20) NOT NULL,
+  asunto VARCHAR(20) NOT NULL,
+  argumento VARCHAR(500) NOT NULL
   )ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table emisora_web.db_cliente
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS emisora_web.db_cliente (
+  id_cliente INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  foto_perfil VARCHAR(100) NOT NULL,
+  username VARCHAR(100) NOT NULL,
+  firstname VARCHAR(100) NOT NULL,
+  lastname VARCHAR(100) NOT NULL,
+  ciudad VARCHAR(75) NOT NULL,
+  addre VARCHAR(75) NOT NULL,
+  telefono VARCHAR(20) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  passw VARCHAR(255) NOT NULL,
+  rol VARCHAR(255) NOT NULL,
+  data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+  )ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table emisora_web.db_eventos
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS emisora_web.db_eventos (
+  id_eventos INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre_evento VARCHAR(75) NOT NULL,
+  fecha VARCHAR(10) NOT NULL,
+  hora VARCHAR(10) NOT NULL,
+  patrocinador VARCHAR(75) NOT NULL,
+  actividad VARCHAR(75) NOT NULL,
+  lugar VARCHAR(75) NOT NULL,
+  data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+  )ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table emisora_web.db_ganador
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS emisora_web.db_ganador (
+  id_ganador INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  firstname VARCHAR(100) NOT NULL,
+  lastname VARCHAR(100) NOT NULL,
+  premio_entregado VARCHAR(100) NOT NULL,
+  patrocinador VARCHAR(100) NOT NULL,
+  codigo VARCHAR(25) NOT NULL,
+  fecha_entrega VARCHAR(20) NOT NULL,
+  data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+  )ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table emisora_web.db_sorteos
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS emisora_web.db_sorteos (
+  id_sorteos INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(100) NOT NULL,
+  codigo VARCHAR(25) NOT NULL,
+  nombre_producto VARCHAR(100) NOT NULL,
+  lugar VARCHAR(100) NOT NULL,
+  fecha VARCHAR(10) NOT NULL,
+  hora VARCHAR(10) NOT NULL,
+  telefono VARCHAR(20) NOT NULL,
+  imagen VARCHAR(100) NOT NULL,
+  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+  )ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table emisora_web.fk_cliente_sorteos_ganador
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS emisora_web.r_cliente_sorteos (
+  id_cliente_sorteos INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  cliente_id  INT(11) NOT NULL,
+  sorteos_id  INT(11) NOT NULL,
+  data_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+  CONSTRAINT  r_cliente_id FOREIGN KEY (cliente_id) REFERENCES emisora_web.db_cliente (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT  r_sorteos_id FOREIGN KEY (sorteos_id) REFERENCES emisora_web.db_sorteos (id_sorteos) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE = InnoDB;

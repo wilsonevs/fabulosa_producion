@@ -6,14 +6,13 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 // const bcryptjs = require('bcryptjs');
-// const session = require('express-session');
-var session = require('cookie-session');
+const session = require('express-session');
 
 const app = express(); //Inicializar el server
 
 //Configurar el server:
 //configurar puerto:
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 //gestor de plantillas
 app.set('view engine', 'ejs');
 

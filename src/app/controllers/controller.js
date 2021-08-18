@@ -2,9 +2,9 @@
 // Conexion con bd.
 const connection = require("../../config/connectiondb.js");
 const bcryptjs = require("bcryptjs");
-const uuidv8 = require("../../public/js/random.js");
+const random = require("../../public/js/random.js");
 const path = require("path");
-const {v4} =  require("uuid")
+const {v4}= require("uuid");
 const {unlink} = require("fs-extra");
 
 /* Index */
@@ -401,7 +401,7 @@ const getParticiparSorteo = (req, res) => {
   const getparticipantes = (req, res) => {
     try {
         const consulta =("SELECT * FROM r_cliente_sorteos r INNER JOIN db_cliente c ON r.cliente_id = c.id_cliente INNER JOIN db_sorteos s ON r.sorteos_id = s.id_sorteos");
-        connection.query(consulta, (error, results) => {
+      connection.query(consulta, (error, results) => {
         if (error) {
           console.log("Que error tengo: " + error);
         } else {
@@ -489,7 +489,7 @@ const postSorteosAdmin = async (req, res) => {
   connection.query("INSERT INTO db_sorteos SET ?",
     {
       titulo: titulo,
-      codigo: "Cod-" + uuidv8(),
+      codigo: "Cod-" + v4(),
       nombre_producto: nombre_producto,
       lugar: lugar,
       fecha: fecha,
